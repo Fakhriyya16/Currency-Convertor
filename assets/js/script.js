@@ -47,9 +47,10 @@ buttonsLeft.forEach(button => {
 
         rateFirst = await GetRate(this.innerText,activeRight.innerText,converterLeft);
         rateSecond = await GetRate(activeRight.innerText,activeLeft.innerText,converterRight);
-        
-        inputRight.value = inputLeft.value * rateFirst;
-        
+
+        if(inputLeft != ""){
+            inputLeft.value = inputRight.value * rateSecond;
+        }
     })
 });
 
@@ -64,6 +65,16 @@ buttonsRight.forEach(button => {
         rateFirst = await GetRate(activeLeft.innerText,activeRight.innerText,converterLeft);
         rateSecond = await GetRate(this.innerText,activeLeft.innerText,converterRight);
 
-        inputLeft.value = inputRight.value * rateSecond;
+        if(inputRight != ""){
+            inputRight.value = inputLeft.value * rateFirst;
+        }
     })
 });
+
+inputLeft.addEventListener("input",function(){
+    inputRight.value = inputLeft.value * rateFirst;
+})
+
+inputRight.addEventListener("input",function(){
+    inputLeft.value = inputRight.value * rateSecond;
+})
